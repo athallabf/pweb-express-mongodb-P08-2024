@@ -4,9 +4,9 @@ import { BookController } from '../controllers/book.controller';
 const router = Router();
 const bookController = new BookController();
 
-// router.post('/', bookController.addBook);
-// router.get('/', bookController.getAllBooks);
-// router.get('/:id', bookController.getBookById);
+router.post('/', bookController.addBook);
+router.get('/', bookController.getAllBooks);
+router.get('/:id', bookController.getBookById);
 router.put('/:id', bookController.modifyBook);
 router.delete('/:id', bookController.removeBook);
 

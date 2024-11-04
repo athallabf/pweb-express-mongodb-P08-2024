@@ -3,18 +3,18 @@ import Book from '../models/book.model';
 import { isValidObjectId } from 'mongoose';
 
 export class BookService {
-    // async addBook(bookData: Partial<IBook>): Promise<IBook> {
-    //     const book = new Book(bookData);
-    //     return await book.save();
-    // }
+    async addBook(bookData: Partial<IBook>): Promise<IBook> {
+        const book = new Book(bookData);
+        return await book.save();
+    }
 
-    // async getAllBooks(): Promise<IBook[]> {
-    //     return await Book.find();
-    // }
+    async getAllBooks(): Promise<IBook[]> {
+        return await Book.find();
+    }
 
-    // async getBookById(id: string): Promise<IBook | null> {
-    //     return await Book.findById(id);
-    // }
+    async getBookById(id: string): Promise<IBook | null> {
+        return await Book.findById(id);
+    }
 
     async modifyBook(
         id: string,
