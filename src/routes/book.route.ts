@@ -1,14 +1,14 @@
 import { BookController } from "@/controllers/book.controller";
-import { AuthMiddleware } from "@/middleware/auth";
+import { authMiddleware } from "@/middleware/auth";
 import { Router } from "express";
 
 const router = Router();
 const bookController = new BookController();
 
-router.post("/", AuthMiddleware, bookController.addBook);
-router.get("/", AuthMiddleware, bookController.getAllBooks);
-router.get("/:id", AuthMiddleware, bookController.getBookById);
-router.put("/:id", AuthMiddleware, bookController.modifyBook);
-router.delete("/:id", AuthMiddleware, bookController.removeBook);
+router.post("/", authMiddleware, bookController.addBook);
+router.get("/", authMiddleware, bookController.getAllBooks);
+router.get("/:id", authMiddleware, bookController.getBookById);
+router.patch("/:id", authMiddleware, bookController.modifyBook);
+router.delete("/:id", authMiddleware, bookController.removeBook);
 
 export default router;

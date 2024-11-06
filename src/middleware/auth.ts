@@ -6,7 +6,7 @@ interface CustomRequest extends Request {
   user?: string | jwt.JwtPayload;
 }
 
-export const AuthMiddleware = async (
+export const authMiddleware = async (
   req: CustomRequest,
   res: Response,
   next: NextFunction

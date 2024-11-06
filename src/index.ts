@@ -2,6 +2,7 @@ import express, { type Express, type Request, type Response } from "express";
 import connectDB from "./db-connection";
 import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
+import mechanismRoutes from "./routes/mechanism.route";
 
 const app: Express = express();
 const port = 3000;
@@ -19,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 // Routes
 app.use("/book", bookRoutes);
 app.use("/auth", authRoutes);
+app.use("/mechanism", mechanismRoutes);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
