@@ -1,7 +1,7 @@
-import connectDB from './db-connection';
-import productRoutes from './routes/product.route';
-import bookRoutes from './routes/book.route';
-import express, { type Request, type Response, Express } from 'express';
+import express, { type Express, type Request, type Response } from "express";
+import connectDB from "./db-connection";
+import authRoutes from "./routes/auth.route";
+import bookRoutes from "./routes/book.route";
 
 const app: Express = express();
 const port = 3000;
@@ -13,12 +13,12 @@ app.use(express.json());
 connectDB();
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("Healthy");
 });
 
 // Routes
-app.use('/products', productRoutes);
-app.use('/book', bookRoutes);
+app.use("/book", bookRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
