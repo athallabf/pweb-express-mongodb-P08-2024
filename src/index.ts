@@ -3,9 +3,10 @@ import connectDB from "./db-connection";
 import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
 import mechanismRoutes from "./routes/mechanism.route";
+import formatResponse from "./utils/formatResponse";
 
 const app: Express = express();
-const port = 3000;
+const port = process.env.PORT;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -14,7 +15,9 @@ app.use(express.json());
 connectDB();
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Healthy");
+  const date = new Date();
+  const response = formatResponse("success", "Hello World", date);
+  res.send(response);
 });
 
 // Routes

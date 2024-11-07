@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import BookService from "../services/book.service";
 
 export class BookController {
-  async addBook(req: Request, res: Response, next: NextFunction) {
+  async addBook(req: Request, res: Response) {
     try {
       const book = await BookService.addBook(req.body);
       res.status(201).json(book);
