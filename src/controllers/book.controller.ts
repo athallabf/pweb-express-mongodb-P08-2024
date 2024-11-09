@@ -1,24 +1,31 @@
 import type { NextFunction, Request, Response } from "express";
 import BookService from "../services/book.service";
+import formatResponse from "@/utils/formatResponse";
 
 export class BookController {
   async addBook(req: Request, res: Response) {
     try {
       const book = await BookService.addBook(req.body);
-      res.status(201).json(book);
-      return;
+      const response = formatResponse(
+        "success",
+        "Successfully get all books",
+        book,
+      );
+      res.status(201).json(response);
     } catch (error) {
-      res.status(400).json({ message: error.message });
-      return;
+      const response = formatResponse("failed", error.message);
+      res.status(400).json(response);
     }
   }
 
   async getAllBooks(req: Request, res: Response) {
     try {
       const books = await BookService.getAllBooks();
-      res.json(books);
+      const response = formatResponse("success", "Successfully get book", book);
+      res.status(200).json(response);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      const response = formatResponse("failed", error.message);
+      res.status(500).json(response);
     }
   }
 
@@ -31,21 +38,28 @@ export class BookController {
       }
       res.json(book);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      const response = formatResponse("failed", error.message);
+      res.status(500).json(response);
     }
   }
 
   async modifyBook(req: Request, res: Response) {
     try {
       const book = await BookService.modifyBook(req.params.id, req.body);
-      res.json(book);
+      const response = formatResponse(
+        "success",
+        "Successfully update book",
+        book,
+      );
+      res.status(200).json(response);
     } catch (error) {
+      const response = formatResponse("failed", error.message);
       if (error.message.includes("Invalid book ID format")) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json(response);
       } else if (error.message.includes("not found")) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json(response);
       } else {
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json(response);
       }
     }
   }
@@ -53,14 +67,20 @@ export class BookController {
   async removeBook(req: Request, res: Response) {
     try {
       const book = await BookService.removeBook(req.params.id);
-      res.json({ message: "Book deleted successfully", book });
+      const response = formatResponse(
+        "success",
+        "Successfully delete book",
+        book,
+      );
+      res.status(200).json(response);
     } catch (error) {
+      const response = formatResponse("failed", error.message);
       if (error.message.includes("Invalid book ID format")) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json(response);
       } else if (error.message.includes("not found")) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json(response);
       } else {
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json(response);
       }
     }
   }
