@@ -1,6 +1,6 @@
+import formatResponse from "@/utils/formatResponse";
 import type { NextFunction, Request, Response } from "express";
 import BookService from "../services/book.service";
-import formatResponse from "@/utils/formatResponse";
 
 export class BookController {
   async addBook(req: Request, res: Response) {
@@ -21,7 +21,7 @@ export class BookController {
   async getAllBooks(req: Request, res: Response) {
     try {
       const books = await BookService.getAllBooks();
-      const response = formatResponse("success", "Successfully get book", book);
+      const response = formatResponse("success", "Successfully get book", books);
       res.status(200).json(response);
     } catch (error) {
       const response = formatResponse("failed", error.message);

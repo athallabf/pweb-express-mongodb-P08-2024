@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { type Express, type Request, type Response } from "express";
 import connectDB from "./db-connection";
 import authRoutes from "./routes/auth.route";
@@ -10,6 +11,7 @@ const port = process.env.PORT;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(cors());
 
 // Connect to MongoDB
 connectDB();
